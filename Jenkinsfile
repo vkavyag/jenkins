@@ -1,19 +1,19 @@
 pipeline {
-	agent { label 'master' }
+	agent none
  
 	stages {
 		stage ('makefile') {
+			agent { label 'C-node'}
 			steps { 
-				build 'cproject'
-				//*echo 'This is slaveforc node with STAGE 1'
-				//sh 'sleep 10'
+				git 'https://github.com/vkavyag/c-project.git'
+				sh 'make'
 			}	
 		}
 		stage ('maven') {
+			agent { label 'Java-node'}
 			steps {
-				build 'Javaproject'
-				//echo 'This is slaveforjava with STAGE 2'
-				//sh 'sleep 10'
+				git 'https://github.com/vkavyag/hello-world.git'
+				sh 'mvn clean install'
 			}	
 		}
 		/*stage ('STAGE 3') {
