@@ -1,30 +1,32 @@
 pipeline {
-     agent none
-
-stages {
-  stage ('STAGE 1') {
-       agent {label 'C-node'}   
-       steps {
-               sh 'sleep 10'
-  }
-  }
-  stage ('STAGE 2') {
-       agent {label 'Java-node'}
-       steps {
-               sh 'sleep 10'
-  }
-  }
-  stage ('STAGE 3') {
-       agent {label 'Java-node'}
-       steps {
-               sh 'sleep 10'
-  }
-  }
-  stage ('STAGE 4') {
-       agent {label 'master'}
-       steps {
-               sh 'sleep 10'
-  }
-  }
-}
+	agent { label 'master' }
+ 
+	stages {
+		stage ('makefile') {
+			steps { 
+				build 'cproject'
+				//*echo 'This is slaveforc node with STAGE 1'
+				//sh 'sleep 10'
+			}	
+		}
+		stage ('maven') {
+			steps {
+				build 'Javaproject'
+				//echo 'This is slaveforjava with STAGE 2'
+				//sh 'sleep 10'
+			}	
+		}
+		/*stage ('STAGE 3') {
+			steps {
+				echo 'This is slaveforc with STAGE 3'
+				sh 'sleep 10'
+			}	
+		}
+		stage ('STAGE 4') {
+			steps {
+				echo 'This is master with STAGE 4'
+				sh 'sleep 10'
+			}	
+		}*/
+	}
 }
