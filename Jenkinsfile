@@ -17,13 +17,13 @@ stages {
   stage ('STAGE 3') {
        agent {label 'Java-node'}
        steps {
-               sh 'sleep 30'
+               sh 'sleep 10'
   }
   }
   stage ('STAGE 4') {
        agent {label 'master'}
        steps {
-               sh 'sleep 30'
+               sh 'sleep 10'
   }
   }
 }
