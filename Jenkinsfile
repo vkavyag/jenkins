@@ -2,7 +2,8 @@ pipeline {
 	agent none
  
 	stages {
-		stage ('makefile') {
+		stage ('make and maven') {
+			parallel {
 			agent { label 'C-node'}
 			steps { 
 				git 'https://github.com/vkavyag/c-project.git'
